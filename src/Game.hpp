@@ -31,6 +31,9 @@ private:
 
     sf::RenderWindow m_window;
     std::stack<std::unique_ptr<State>> m_states;
+
+    sf::Font m_font;
+    Dictionary<sf::Text> m_texts;
 };
 
 #endif // SRC_GAME_HPP

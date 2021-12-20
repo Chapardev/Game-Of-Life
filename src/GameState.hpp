@@ -7,18 +7,17 @@
 
 class GameState : public State
 {
-private:
-    int _getAliveNeighbors(std::size_t p_x, std::size_t p_y) const;
-    void _createCell(float p_x, float p_y);
-
-    void _checkAliveCell(std::size_t p_x, std::size_t p_y);
-    void _checkDeadCell(std::size_t p_x, std::size_t p_y);
-    void _checkCell(std::size_t p_x, std::size_t p_y);
-
 public:
-    GameState(sf::RenderWindow &p_window, std::stack<std::unique_ptr<State>> &p_states, 
+    GameState(sf::RenderWindow &p_window, std::stack<std::unique_ptr<State>> &p_states, sf::Font &p_font, Dictionary<sf::Text> &p_texts,
         const std::array<std::array<Cell, 20>, 40> &p_cells, const std::array<sf::RectangleShape, 39> &p_columns, 
         const std::array<sf::RectangleShape, 19> &p_rows);
+
+    int getAliveNeighbors(const sf::Vector2i &p_coords) const;
+    void createCell(float p_x, float p_y);
+
+    void checkAliveCell(const sf::Vector2i &p_coords);
+    void checkDeadCell(const sf::Vector2i &p_coords);
+    void checkCell(const sf::Vector2i &p_coords);
 
     void pollEvents(sf::Event &p_event) override;
     void update() override;
@@ -33,9 +32,6 @@ private:
     const sf::Time m_timeInterval { sf::seconds(0.15f) };
 
     sf::Clock m_clock;
-
-    sf::Font m_font;
-    sf::Text m_stepText;
 
     const std::array<sf::RectangleShape, s_countLinesX> &m_columns;
     const std::array<sf::RectangleShape, s_countLinesY> &m_rows;

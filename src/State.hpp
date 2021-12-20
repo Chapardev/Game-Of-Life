@@ -1,5 +1,5 @@
-#ifndef SRC_STATES_HPP
-#define SRC_STATES_HPP
+#ifndef SRC_STATE_HPP
+#define SRC_STATE_HPP
 
 #include <SFML/Graphics.hpp>
 
@@ -14,7 +14,7 @@ using Dictionary = std::map<std::string, T>;
 class State
 {
 public:
-    State(sf::RenderWindow &p_window, std::stack<std::unique_ptr<State>> &p_states);
+    State(sf::RenderWindow &p_window, std::stack<std::unique_ptr<State>> &p_states, sf::Font &p_font, Dictionary<sf::Text> &p_texts);
 
     virtual void pollEvents(sf::Event &p_event);
     virtual void update() = 0;
@@ -24,12 +24,8 @@ protected:
     sf::RenderWindow &m_window;
     std::stack<std::unique_ptr<State>> &m_states;
     
-    // Resources
-    static Dictionary<sf::Texture> s_textures;
-    static Dictionary<sf::Font> s_fonts;
-
-    static Dictionary<sf::Sprite> s_sprites;
-    static Dictionary<sf::Text> s_texts;
+    sf::Font &m_font;
+    Dictionary<sf::Text> &m_texts;
 };
 
-#endif // SRC_STATES_HPP
+#endif // SRC_STATE_HPP

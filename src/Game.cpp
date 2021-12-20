@@ -35,10 +35,14 @@ Game::Game()
     {
         throw std::string { "Unable to load icon image!" };
     }
-
     m_window.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
 
-    m_states.push(std::make_unique<EditorState>(m_window, m_states));
+    if (!m_font.loadFromFile("../assets/fonts/consola.ttf"))
+    {
+        throw std::string{ "Unable to load font!" };
+    }
+    
+    m_states.push(std::make_unique<EditorState>(m_window, m_states, m_font, m_texts));
 }
 
 void Game::pollEvents()
@@ -62,7 +66,7 @@ void Game::update()
 
 void Game::draw()
 {
-    m_window.clear(sf::Color { 245, 245, 245 });
+    m_window.clear({ 245, 245, 245 });
 
     m_states.top()->draw();
 
