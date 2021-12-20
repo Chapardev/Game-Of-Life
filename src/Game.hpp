@@ -29,7 +29,7 @@ private:
     static constexpr int s_windowWidth{ s_blockSize * (s_countLinesX + 1) + s_countLinesX };
     static constexpr int s_windowHeight{ s_blockSize * (s_countLinesY + 1) + s_countLinesY };
 
-    sf::RenderWindow m_window;
+    sf::RenderWindow m_window{ { s_windowWidth, s_windowHeight }, "Game Of Life", sf::Style::Titlebar | sf::Style::Close };
     std::stack<std::unique_ptr<State>> m_states;
 
     sf::Font m_font;

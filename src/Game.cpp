@@ -27,8 +27,7 @@ void Game::logError(const std::string &p_message)
     }
 }
 
-Game::Game() 
-    : m_window { { s_windowWidth, s_windowHeight }, "Game Of Life", sf::Style::Titlebar | sf::Style::Close }
+Game::Game()
 {
     sf::Image icon;
     if (!icon.loadFromFile("../assets/images/icon.png"))
